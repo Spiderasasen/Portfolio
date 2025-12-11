@@ -4,8 +4,65 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="css/main.css" type="text/css">
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
+<!--background code sinppets-->
+<div class="background_code">
+    <pre>
+        //making the image system
+        public static BufferedImage loadImage(String imageURL){
+            //loads the image
+            BufferedImage image = null;
+            try {
+                URL url = new URL(imageURL);
+                image = ImageIO.read(url); //reads the url
+            } catch (IOException e) { //if no image can be loaded then it will have an error
+                e.printStackTrace();
+                System.err.println("Error loading image from URL: " + imageURL);
+            }
+            return image; //returns the image now processed and ready to use
+        }
+
+
+
+        def main_layout(root, canvas, name: str,num_elements: int, sortingAlgorithmConsole, sortingAlgorithmVisualizer, complexity):
+            #for the console log
+            num:List[int] = creatingTheList(num_elements)
+            num2: List[int] = sortingAlgorithmConsole(num.copy())
+            print(f"{num2}\ndid the algorithm in the background")
+            #for the visualizer
+            print("starting the visual effects")
+            steps = sortingAlgorithmVisualizer(num.copy())
+            time = complexity.get(name, "")
+            visualizer(canvas, steps, complexity=time, name=name)
+            print("finished the visualization")
+            #shows the results
+            show_algorithm(root, name, num, num2)
+
+
+
+        //making the overlay video effect
+        const image = document.querySelector('.clickable-image');
+        const video = document.getElementById('overlayVideo');
+
+        image.addEventListener('click', () => {
+            video.style.display = 'block';
+            video.currentTime = 0;
+            video.play();
+        });
+
+        video.addEventListener('ended', () =>{
+            video.style.display = 'none';
+        });
+    </pre>
+</div>
 <!--navigation-->
     <nav>
         <a href="#">About</a>
