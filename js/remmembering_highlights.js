@@ -5,18 +5,31 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         //saves something to local storage
         sessionStorage.setItem("activeLink", link.getAttribute('href'));
+        console.log("activeLink", link.getAttribute('href'));
     });
 });
 
 //on page load, checking localStorage
 const activeLink = sessionStorage.getItem("activeLink");
+const currentPage = window.location.pathname.split('/').pop();
 if (activeLink){
     navLinks.forEach(link => {
-        if (link.getAttribute('href') === activeLink){
-            link.classList.add("active");
+        //removeing the link first
+
+        link.classList.remove('active');
+        //user clicked a link earlier in the session
+        if (activeLink && link.getAttribute('href') === activeLink){
+            link.classList.add('active');
+            console.log("Case 1) user clicked a link earlier in the session")
+        }
+        //falling back to the orginal highlight
+        else if (link.getAttribute('href') === currentPage){
+            link.classList.add('active');
+            console.log("Case 2) falling back to the orginal highlight")
         }
         else{
-            link.classList.remove("active");
+            link.classList.remove('active');
+            console.log("Removing all the other highlights!")
         }
     });
 }
