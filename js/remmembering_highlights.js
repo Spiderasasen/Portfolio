@@ -22,14 +22,22 @@ if (activeLink){
             link.classList.add('active');
             console.log("Case 1) user clicked a link earlier in the session")
         }
+        else{
+            link.classList.remove('active');
+            console.log("Removing all the other highlights! in case 1")
+        }
+    });
+}
+else{
+    navLinks.forEach(link => {
         //falling back to the orginal highlight
-        else if (link.getAttribute('href') === currentPage){
+        if (link.getAttribute('href') === currentPage){
             link.classList.add('active');
             console.log("Case 2) falling back to the orginal highlight")
         }
         else{
             link.classList.remove('active');
-            console.log("Removing all the other highlights!")
+            console.log("Removing all the other highlights! in case 2")
         }
-    });
+    })
 }
