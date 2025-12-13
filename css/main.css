@@ -38,6 +38,12 @@ nav a{
 }
 nav a:hover{
     color: #00aced;
+    text-decoration: underline;
+}
+nav a:active{
+    color: #00aced;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 /* Main content area */
