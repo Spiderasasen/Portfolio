@@ -47,6 +47,24 @@ label {
     color: #000;
     border-color: #FFF;
 }
+/*python hover*/
+#python:hover label{
+    background-color: #306998;
+    color: #ffd43b;
+    border-color: #306998;
+}
+/*Java hover*/
+#java:hover label{
+    background-color: #f89820;
+    color: white;
+    border-color: #f89820;
+}
+/*rust hover*/
+#rust:hover label{
+    background-color: #e43717;
+    color: white;
+    border-color: #e43717;
+}
 /*hovering showing the images*/
 .lang:hover .logo{
     display: flex;
@@ -63,4 +81,22 @@ label {
     background: linear-gradient(90deg, #e34c26, #264de4, #f7df1e);
     color: #000;
     border-color: #fff;
+}
+/*active python*/
+#python.active label{
+    background-color: #306998;
+    color: #ffd43b;
+    border-color: #306998;
+}
+/*java active*/
+#java.active label{
+    background-color: #f89820;
+    color: white;
+    border-color: #f89820;
+}
+/*rust active*/
+#rust.active label{
+    background-color: #e43717;
+    color: white;
+    border-color: #e43717;
 }
