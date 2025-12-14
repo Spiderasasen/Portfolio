@@ -1,0 +1,18 @@
+div.container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+div.container .content{
+    text-align: left;
+    width: 600px;
+}
+h1{
+    padding-right: 876px;
+    text-decoration: underline;
+}
