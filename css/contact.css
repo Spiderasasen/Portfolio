@@ -25,3 +25,8 @@ div.image_block img{
     height: auto;
     margin-bottom: 10px;
 }
+a{
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
