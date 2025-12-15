@@ -117,6 +117,7 @@ label {
     color: white;
     border-color: #e43717;
 }
+/*for the grid system*/
 .projects-grid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
