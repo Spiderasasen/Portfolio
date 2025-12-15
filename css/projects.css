@@ -1,11 +1,28 @@
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.main_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
 div.custom_content{
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    /*align-items: flex-start;*/
     gap: 20px;
-    margin-right: auto;
-    margin-left: auto;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    /*height: auto;*/
+}
+/*for projects*/
+.projects-section{
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
 }
 /*for the labels*/
 label {
@@ -99,4 +116,24 @@ label {
     background-color: #e43717;
     color: white;
     border-color: #e43717;
+}
+.projects-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+.project-card{
+    background-color: #2a2a2a;
+    border: 1px solid #00aced;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+.project-card:hover{
+    transform: scale(1.05);
+    border-color: #fff;
 }
