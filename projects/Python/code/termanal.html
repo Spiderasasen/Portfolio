@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python-code-that-i-used-for-stats-class</title>
+    <link rel="stylesheet" href="../../../css/terminal.css">
+</head>
+<body>
+    <div>
+        <p>Starting main.py</p>
+    </div>
+    <!--im guess ill have to make it where all the code goes here-->
+    <div id="output"></div>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <script>
+        async function runPython(){
+            console.log("Running Python script in javascript");
+            //loads pyride
+            let pyodide = await loadPyodide()
+
+            //fetching the python files (HAS TO BE IN THE SAME DIRECTORY)
+            let response = await fetch("main.py");
+            console.log(response)
+            let pythonCode = await response.text();
+
+            //preparing the code to be catched
+            let outputBuffer = "";
+
+            //redirect stdout to capture prints
+            pyodide.setStdout({
+               batched: (data) => {
+                   outputBuffer += data + "\n";
+               }
+            });
+
+            //runs the code
+            await pyodide.runPythonAsync(pythonCode);
+
+            //new line to the end of all the code
+            outputBuffer += "Ending main.py";
+
+            //showing in the fake terminal
+            document.getElementById("output").textContent = outputBuffer;
+        }
+
+        //automatically runs the code
+        console.log("calling runPython script");
+        runPython()
+    </script>
+</body>
+</html>
