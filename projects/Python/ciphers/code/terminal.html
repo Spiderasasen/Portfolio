@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ciphers</title>
+    <link rel="stylesheet" href="../../../../css/terminal.css" type="text/css">
+</head>
+<body>
+    <div><p>Starting Main.py</p></div>
+    <div id="output"></div>
+<!--    js code-->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <script>
+        async function runPython(){
+            console.log("Running Python...");
+            let pyodide = await loadPyodide();
+
+            //getting the text files first
+            const text_files = ["text.txt", "morse_code_text.txt"];
+            for (const text_file of text_files){ //loops through all the files to declare them
+                const response = await fetch(text_file);
+                const content = await response.text();
+                console.log(content);
+                pyodide.FS.writeFile(text_file, content);
+            }
+            const python_files = ["__init__.py", "checking_if_manual.py", "text_reader.py", "atbash.py", "caesar.py",  "morse_code.py", "ROT13.py", "Main.py"];
+            for (const file of python_files){
+                console.log(file)
+                const response = await fetch(file);
+                const content = await response.text();
+                console.log(content);
+                //runs each one sepreatly
+                pyodide.FS.writeFile(file, content);
+                console.log(pyodide.FS.readdir("/"));
+            }
+
+            //grabs the print statements
+            let outputBuffer = "";
+            await pyodide.setStdout({
+                batched: (data) => {
+                    outputBuffer += data + "\n";
+                }
+            });
+
+            //overrideing the input section
+            await pyodide.runPythonAsync(`
+                import sys
+                def js_input(prompt=None):
+                    import js
+                    return js.prompt(prompt or "Enter input:")
+                sys.modules['builtins'].input = js_input
+            `);
+
+            try{
+                await pyodide.runPythonAsync(`exec(open("Main.py").read())`);
+            }
+            catch (err){
+                console.error("Error reading main ",err);
+            }
+
+            document.getElementById("output").textContent = outputBuffer;
+        }
+        console.log("running python")
+        runPython();
+    </script>
+</body>
+</html>
