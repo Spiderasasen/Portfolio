@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python-SQL-Chess-Database-</title>
+    <link rel="stylesheet" href="../../../../css/terminal.css">
+</head>
+<body>
+    <div><p>Starting Chess.py</p></div>
+    <div id="output"></div>
+
+<!--    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>-->
+    <script>
+        async function showPython(){
+            console.log("ready to share the code as an error");
+
+            const rawCode = await fetch("Chess.py");
+            const pythonCode = await rawCode.text();
+            console.log(pythonCode);
+
+            const output = document.getElementById("output");
+            setTimeout(() => {
+                output.textContent += pythonCode +
+                    "\n\nSQL connection failed.\nReason: No server/database connection available in this environment.";
+                output.style.color = "red"; // switch to error style
+            }, 5000);
+
+        }
+        showPython();
+    </script>
+</body>
+</html>
