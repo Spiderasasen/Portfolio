@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Positivity-with-Letters</title>
+    <link rel="stylesheet" href="../../../../css/terminal.css">
+</head>
+<body>
+    <div>
+        <p>Starting Main.py</p>
+    </div>
+    <div id="output"></div>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <script>
+        async function runPython(){
+            console.log("Running Python script in pyodide");
+            //loading pyodide
+            let pyodide = await loadPyodide();
+
+            //getting the text file first
+            const textFile = await fetch("Positive-Words.txt");
+            const text = await textFile.text();
+            console.log(text);
+
+            //writing the text in the virtul area
+            pyodide.FS.writeFile("Positive-Words.txt", text);
+
+            //getting the python file
+            const responsePy = await fetch("Main.py");
+            const pythonCode = await responsePy.text();
+            console.log(pythonCode);
+
+            //printing to the main section
+            // After running the Python code
+            let outputBuffer = "";
+
+            // Set stdout to capture print() output
+            await pyodide.setStdout({
+                batched: (data) => {
+                    outputBuffer += data + "\n";
+                }
+            });
+
+            //overrideing the input section
+            await pyodide.runPythonAsync(`
+                import sys
+                def js_input(prompt=None):
+                    import js
+                    return js.prompt(prompt or "Enter input:")
+                sys.modules['builtins'].input = js_input
+            `);
+
+            // running the code
+            const result = await pyodide.runPythonAsync(pythonCode);
+            console.log(result);
+
+            //adding the endingline
+            outputBuffer += "Ending Main.py";
+
+            document.getElementById("output").textContent = outputBuffer;
+        }
+        runPython();
+    </script>
+</body>
+</html>
